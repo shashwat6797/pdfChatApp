@@ -13,13 +13,21 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { metadata } from "@/app/layout";
 
+type Data = {
+  name : string|undefined;
+  md5Hash : string|undefined;
+}
+
 export default function UploadFile() {
   const [uploading, setUploading] = useState(false);
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: async (file_name: String) => {
+    mutationFn: async (data:Data) => {
+      const file_name = data.name;
+      const file_key = data.md5Hash;
       const response = await axios.post("/api/create-chat", {
         file_name,
+        file_key
       });
       return response.data;
     },
@@ -63,8 +71,9 @@ export default function UploadFile() {
             setDownloadURL(url);
           });
           getMetadata(uploadTask.snapshot.ref).then((metadata) => {
-            const data = metadata.name;
-            console.log({ metadata_name: data });
+            console.log({ metadata_name: metadata.name});
+            const {name, md5Hash} = metadata;
+            const data:Data = {name, md5Hash}
             mutate(data, {
               onSuccess: (data) => {
                 console.log({ mutate: data });

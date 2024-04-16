@@ -19,11 +19,6 @@ const getDocs = async (path: string) => {
   });
 };
 
-const pinecone = new Pinecone({
-  apiKey: process.env.PINECONE_API_KEY!,
-  environment: process.env.PINECONE_ENVIRONMENT!,
-});
-
 type PDFPage = {
   pageContent: string;
   metadata: {
@@ -48,25 +43,19 @@ export async function loadFirebaseIntoPinecone(fileKey: string) {
   const vectors = await Promise.all(documents.flat().map(embedDocument));
 
   //4. Upload to pinecone
-  console.log({
-    environment: process.env.PINECONE_ENVIRONMENT,
-    apiKey: process.env.PINECONE_API_KEY,
-  });
-  const pc = new Pinecone({
-    environment: process.env.PINECONE_ENVIRONMENT!,
-    apiKey: process.env.PINECONE_API_KEY!,
-  });
-  const pineconeIndex = pc.index("pdfchat-shash");
-  //vectors.map((vector) => console.log({ vecotr: vector }));
-  const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
-  console.log("inserting into pinecone");
+  const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! });
+  const index = pc.index("chat-pdf");
+  const name = convertToAscii(fileKey);
+  console.log("name : ", name);
+  const namespace = index.namespace(name);
 
   try {
     await namespace.upsert(vectors);
-    return pages;
-  } catch (e) {
-    console.log("Error in uploading to Pinecone : ", e);
+    console.log("Upsert Successful");
     return vectors;
+  } catch (e) {
+    console.log("Error in upserting to pinecone : ", e);
+    return pages;
   }
 }
 
