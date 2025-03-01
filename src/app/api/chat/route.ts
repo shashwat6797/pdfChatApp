@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 
 const genAI = new GoogleGenerativeAI(
   process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
-    "AIzaSyAd9AVriWB1VifkQjH5UezmsRADXEi-wzw"
+    "AIzaSyCnQvEkboWslftZCHJC7LAV0VrLaNKaROo"
 );
 
 const buildGoogleGenAIPrompt = (messages: Message[]) => ({
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
   const prompt = {
     role: "system",
     content: `AI assistant is a brand new, powerful, human-like artificial intelligence.
-      START CONTEXT BLOCK
+      START OF CONTEXT BLOCK
       ${context}
       END OF CONTEXT BLOCK
       AI assistant will take into account any CONTEXT BLOCK that is provided in a conversation and answer the question ${lastMessage.content}.
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
   };
 
   const geminiStream = await genAI
-    .getGenerativeModel({ model: "gemini-pro" })
+    .getGenerativeModel({ model: "gemini-2.0-flash" })
     .generateContentStream(prompt.content);
 
   // Convert the response into a friendly text-stream

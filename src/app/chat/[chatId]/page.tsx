@@ -13,7 +13,7 @@ type Props = {
 };
 
 const ChatPage = async ({ params: { chatId } }: Props) => {
-  const { userId } = await auth();
+  const { userId } = auth();
   if (!userId) {
     return redirect("sign-in");
   }
@@ -37,7 +37,7 @@ const ChatPage = async ({ params: { chatId } }: Props) => {
           <PdfViewer pdfUrl={currentChat?.pdfUrl || ""} />
         </div>
         <div className="flex-[3] border-gray-900 border-solid border-l-4">
-          <ChatComponent chatId={chatId} />
+          <ChatComponent chatId={chatId} _chats={_chats} />
         </div>
       </div>
     </div>

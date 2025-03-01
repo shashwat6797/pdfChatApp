@@ -16,6 +16,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sigmar: "var(--font-sigmar)",
+        bebas_neue: "var(--font-bebas-neue)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
