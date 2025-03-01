@@ -69,7 +69,7 @@ async function embedDocument(doc: Document) {
   try {
     const embeddings = await getEmbeddings(doc.pageContent);
     const value: Array<Number> = getArrayFromEmbeddings(embeddings);
-    console.log("got embeddings");
+    console.log("got embeddings : ", value);
     const hash = md5(doc.pageContent);
     return {
       id: hash,

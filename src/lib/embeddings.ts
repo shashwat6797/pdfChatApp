@@ -8,7 +8,7 @@ export async function getEmbeddings(text: string) {
       "feature-extraction",
       "Xenova/all-MiniLM-L6-v2",
     );
-    const result = await extractor("reached", {
+    const result = await extractor(text, {
       pooling: "mean",
       normalize: true,
     });
