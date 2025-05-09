@@ -16,9 +16,9 @@ const LoadingComponent = () => (
     variants={imageVariants}
     initial="hidden"
     animate="visible"
-    className="flex flex-col items-center gap-2"
+    className="flex flex-col items-center justify-between"
   >
-    <p className="max-w-xl sm:max-w-sm mt-1 px-5 text-lg text-slate-600">
+    <p className="max-w-xl sm:text-5xl sm:max-w-xl mb-5 px-5 text-lg text-slate-600">
       Join to instantly answer questions and understand research with AI
     </p>
     <motion.div
@@ -36,14 +36,14 @@ const LoadingComponent = () => (
         animate="visible"
       />
     </motion.div>
-    <div className="flex justify-center flex-col gap-2 items-center">
-      <p className="font-bebas_neue text-2xl font-semibold">
+    <div className="flex mt-8 justify-center flex-col md:flex-row gap-2 md:gap-5 items-center mt-5">
+      <div className="flex text-center font-bebas_neue text-2xl sm:text-3xl font-semibold">
         Login to get Started!
-      </p>
+      </div>
       <Link href={"/sign-in"}>
-        <Button>
-          <LogIn className="w-7 h-7" />
-        </Button>
+        <div className="flex items-center h-25 w-25 bg-blue-600 p-3 rounded-full hover:scale-110 ease-in duration-200 active:bg-blue-700 text-white">
+          <LogIn className="white" />
+        </div>
       </Link>
     </div>
   </motion.div>

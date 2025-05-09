@@ -37,7 +37,7 @@ export async function loadFirebaseIntoPinecone(fileKey: string) {
   // 2. Split and Segment the PDF into pages
   const documents = await Promise.all(pages.map(prepareDocument));
 
-  console.log("documents.flat() : ", documents.flat());
+  // console.log("documents.flat() : ", documents.flat());
 
   //3. Vectorise and embed individual documents
   const vectors = await Promise.all(documents.flat().map(embedDocument));
@@ -69,7 +69,7 @@ async function embedDocument(doc: Document) {
   try {
     const embeddings = await getEmbeddings(doc.pageContent);
     const value: Array<Number> = getArrayFromEmbeddings(embeddings);
-    console.log("got embeddings : ", value);
+    // console.log("got embeddings : ", value);
     const hash = md5(doc.pageContent);
     return {
       id: hash,

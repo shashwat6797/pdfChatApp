@@ -32,8 +32,8 @@ export default async function Home() {
   ];
 
   return (
-    <div className="w-screen min-h-screen bg-gradient-to-r from-purple-400 to-yellow-200 overflow-y-scroll flex flex-col items-center">
-      <div className="fixed top-0 left-0 flex items-center justify-between p-8 md:hidden w-screen">
+    <div className="w-screen h-screen bg-gradient-to-r from-purple-400 to-yellow-200 overflow-y-scroll flex flex-col items-center">
+      <div className="sticky top-0 left-0 flex items-center justify-between p-8 md:hidden w-screen">
         <div className="flex">
           {isAuth && (
             <Link href={"/chat/1"}>
@@ -43,12 +43,12 @@ export default async function Home() {
         </div>
         <UserButton afterSignOutUrl="/" />
       </div>
-      <div className="absolute px-2 md:px-0 top-1/2 sm:left-1/2 sm:-translate-x-1/2 -translate-y-2/3 md:-translate-y-1/2">
+      <div className="text-7xl mt-10 font-semibold font-bebas_neue">
+        <TypewriterEffectSmooth words={words} />
+      </div>
+      <div className="w-[60%]">
         <div className="flex flex-col items-center text-center">
-          <div className="flex items-center">
-            <h1 className="mr-3 text-7xl font-semibold font-bebas_neue">
-              <TypewriterEffectSmooth words={words} className="max-w-sm" />
-            </h1>
+          <div className="flex items-center mt-5">
             <div className="hidden md:block">
               <UserButton afterSignOutUrl="/" />
             </div>
@@ -60,7 +60,7 @@ export default async function Home() {
               </Link>
             )}
           </div>
-          <div className="container mx-auto p-4">
+          <div className="container  p-4">
             {!isAuth && <LoadingComponent />}
           </div>
           <div className="w-full mt-4">
